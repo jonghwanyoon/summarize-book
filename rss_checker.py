@@ -56,17 +56,20 @@ def fetch_rss_entries(url: str) -> list[dict]:
     return entries
 
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+
+
 def main():
     parser = argparse.ArgumentParser(description="yes24 RSS 피드에서 새 도서 탐지")
     parser.add_argument(
         "--rss-file",
-        default="yes24_rss.md",
-        help="RSS URL 목록 파일 경로 (default: yes24_rss.md)",
+        default=None,
+        help="RSS URL 목록 파일 경로 (default: 스크립트 경로/yes24_rss.md)",
     )
     parser.add_argument(
         "--state-file",
-        default="processed_books.json",
-        help="처리 상태 파일 경로 (default: processed_books.json)",
+        default=None,
+        help="처리 상태 파일 경로 (default: 스크립트 경로/processed_books.json)",
     )
     parser.add_argument(
         "--run",
@@ -81,8 +84,8 @@ def main():
     )
     args = parser.parse_args()
 
-    rss_path = Path(args.rss_file)
-    state_path = Path(args.state_file)
+    rss_path = Path(args.rss_file) if args.rss_file else SCRIPT_DIR / "yes24_rss.md"
+    state_path = Path(args.state_file) if args.state_file else SCRIPT_DIR / "processed_books.json"
 
     if not rss_path.exists():
         print(f"Error: RSS 파일을 찾을 수 없음: {rss_path}", file=sys.stderr)
