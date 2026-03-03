@@ -1,0 +1,17 @@
+- 건강/취미/실용: https://www.yes24.com/_par_/Rss/KNU001001011.xml
+- 국어와 외국어: https://www.yes24.com/_par_/Rss/KNU001001004.xml
+- 문학: https://www.yes24.com/_par_/Rss/KNU001001017.xml
+- 비즈니스와 경제: https://www.yes24.com/_par_/Rss/KNU001001025.xml
+- 사회: https://www.yes24.com/_par_/Rss/KNU001001022.xml
+- 수험서/자격증: https://www.yes24.com/_par_/Rss/KNU001001015.xml
+- 어린이: https://www.yes24.com/_par_/Rss/KNU001001016.xml
+- 여행과 지리: https://www.yes24.com/_par_/Rss/KNU001001009.xml
+- 역사와 문화: https://www.yes24.com/_par_/Rss/KNU001001010.xml
+- 예술/대중문화: https://www.yes24.com/_par_/Rss/KNU001001007.xml
+- 유아: https://www.yes24.com/_par_/Rss/KNU001001027.xml
+- 인문: https://www.yes24.com/_par_/Rss/KNU001001019.xml
+- 인물: https://www.yes24.com/_par_/Rss/KNU001001020.xml
+- 자기관리: https://www.yes24.com/_par_/Rss/KNU001001026.xml
+- 자연과 과학: https://www.yes24.com/_par_/Rss/KNU001001002.xml
+- 컴퓨터와 인터넷: https://www.yes24.com/_par_/Rss/KNU001001003.xml
+- 컴퓨터: https://www.yes24.com/_par_/Rss/FNU002001008.xml
