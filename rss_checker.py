@@ -72,6 +72,12 @@ def main():
         help="처리 상태 파일 경로 (default: 스크립트 경로/processed_books.json)",
     )
     parser.add_argument(
+        "--llm",
+        choices=["gemini", "claude"],
+        default="gemini",
+        help="요약에 사용할 LLM (default: gemini)",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="목록만 출력하고 요약은 실행하지 않음",
@@ -125,11 +131,14 @@ def main():
         for book in all_new_books:
             print(f"\n요약 중: {book['title']}...")
             prompt = f"/summarize-book {book['link']}"
-            cmd = [
-                "claude", "-p", prompt,
-                "--allowedTools", "Bash,Read,Write,WebFetch",
-                "--permission-mode", "bypassPermissions",
-            ]
+            if args.llm == "gemini":
+                cmd = ["gemini", "-p", prompt, "-y"]
+            else:
+                cmd = [
+                    "claude", "-p", prompt,
+                    "--allowedTools", "Bash,Read,Write,WebFetch",
+                    "--permission-mode", "bypassPermissions",
+                ]
             try:
                 result = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
                 if result.returncode != 0:
