@@ -14,4 +14,3 @@
 - 자기관리: https://www.yes24.com/_par_/Rss/KNU001001026.xml
 - 자연과 과학: https://www.yes24.com/_par_/Rss/KNU001001002.xml
 - 컴퓨터와 인터넷: https://www.yes24.com/_par_/Rss/KNU001001003.xml
-- 컴퓨터: https://www.yes24.com/_par_/Rss/FNU002001008.xml
