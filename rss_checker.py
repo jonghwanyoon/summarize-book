@@ -72,9 +72,9 @@ def main():
         help="처리 상태 파일 경로 (default: 스크립트 경로/processed_books.json)",
     )
     parser.add_argument(
-        "--run",
+        "--dry-run",
         action="store_true",
-        help="새 도서 발견 시 claude CLI로 summarize-book 스킬 호출",
+        help="목록만 출력하고 요약은 실행하지 않음",
     )
     parser.add_argument(
         "--limit",
@@ -121,7 +121,7 @@ def main():
         print(f"  [{book['rss_category']}] {book['title']}")
         print(f"    {book['link']}")
 
-    if args.run:
+    if not args.dry_run:
         for book in all_new_books:
             print(f"\n요약 중: {book['title']}...")
             prompt = f"/summarize-book {book['link']}"
@@ -145,14 +145,8 @@ def main():
             except subprocess.TimeoutExpired:
                 print(f"  Error: 타임아웃 (180초)", file=sys.stderr)
     else:
-        for book in all_new_books:
-            processed["processed"].append({
-                "id": book["id"],
-                "title": book["title"],
-                "url": book["link"],
-                "category": book.get("rss_category", ""),
-                "processed_at": datetime.now(timezone.utc).isoformat(),
-            })
+        print("\n(dry-run: 목록만 출력, 요약 미실행)")
+        return
 
     processed["last_checked"] = datetime.now(timezone.utc).isoformat()
     save_processed_books(state_path, processed)
