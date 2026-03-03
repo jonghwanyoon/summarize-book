@@ -124,20 +124,26 @@ def main():
     if args.run:
         for book in all_new_books:
             print(f"\n요약 중: {book['title']}...")
+            prompt = f"/summarize-book {book['link']}"
+            cmd = [
+                "claude", "-p", prompt,
+                "--allowedTools", "Bash,Read,Write,WebFetch",
+                "--permission-mode", "bypassPermissions",
+            ]
             try:
-                subprocess.run(
-                    ["claude", "-s", "summarize-book", book["link"]],
-                    check=True,
-                )
-                processed["processed"].append({
-                    "id": book["id"],
-                    "title": book["title"],
-                    "url": book["link"],
-                    "category": book["rss_category"],
-                    "processed_at": datetime.now(timezone.utc).isoformat(),
-                })
-            except subprocess.CalledProcessError as e:
-                print(f"  Error: {e}", file=sys.stderr)
+                result = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+                if result.returncode != 0:
+                    print(f"  Error: {result.stderr[:200]}", file=sys.stderr)
+                else:
+                    processed["processed"].append({
+                        "id": book["id"],
+                        "title": book["title"],
+                        "url": book["link"],
+                        "category": book["rss_category"],
+                        "processed_at": datetime.now(timezone.utc).isoformat(),
+                    })
+            except subprocess.TimeoutExpired:
+                print(f"  Error: 타임아웃 (180초)", file=sys.stderr)
     else:
         for book in all_new_books:
             processed["processed"].append({
